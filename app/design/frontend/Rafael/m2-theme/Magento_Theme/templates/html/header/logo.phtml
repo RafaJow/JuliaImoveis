@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt()
+?>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?= $block->escapeHtml(__('Toggle Nav')) ?></span></span>
+<div class='container-logo'>
+    <a
+        class="logo"
+        href="<?= $block->escapeUrl($block->getUrl('')) ?>"
+        title="<?= $block->escapeHtmlAttr($storeName) ?>"
+        aria-label="store logo">
+        <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"
+            title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+            alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+                <?= $block->getLogoWidth() ? 'width="' . $block->escapeHtmlAttr($block->getLogoWidth()) . '"' : '' ?>
+                <?= $block->getLogoHeight() ? 'height="' . $block->escapeHtmlAttr($block->getLogoHeight()) . '"' : '' ?>
+        />
+    </a>
+</div>
+
+<style>
+.header.content {
+    background: #505443;
+    padding: 20px 0px 0px 0px;
+    margin: 0px;
+    max-width: unset;
+}
+.logo{
+    margin: 0px !important;
+}
+.container-logo {
+    display: flex;
+    justify-content: center;
+}
+.page-header .panel.wrapper {
+    background: #505443;
+}
+
+/* busca e carrinho */
+
+.block-search {
+    float: right;
+    position: absolute;
+    width: 250px;
+    z-index: 4;
+    top: 15px;
+    right: 16vw;
+}
+.minicart-wrapper {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+</style>

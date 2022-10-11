@@ -1,0 +1,74 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
+?>
+
+<nav class="navigation" data-action="navigation">
+    <ul style="display:none;" data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"center","at":"center"}}}'>
+        <li class="lista-menu">
+            <a href="<?= $block->getBaseUrl() ?>home">
+                <span style="color: #FFFFFF">Página inicial</span>
+            </a>
+        </li>
+        <?= /* @noEscape */ $_menuHtml?>
+        <?= $block->getChildHtml() ?>
+        <li class="lista-menu">
+            <a href="#">
+                <span style="color: #FFFFFF">Contato</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+nav.navigation, .section-items.nav-sections-items {
+    background: #c49164;
+    margin: 0px;
+    min-width: 100%;
+}
+.lista-menu{
+    cursor: pointer;
+}
+.lista-menu a {
+    display: flex;
+    align-items: center;
+}
+.lista-menu a:hover{
+    text-decoration: unset;
+}
+.level-top.ui-corner-all > span, .lista-menu {
+    color: white;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 16px;
+}
+.ui-menu.ui-widget {
+    display: flex  !important;
+    justify-content: center;
+}
+.ui-menu.ui-widget li {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+}
+.ui-menu.ui-widget li > a {
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+} 
+.ui-menu.ui-widget li:hover {
+    background: #e5bb88;
+} 
+</style>
