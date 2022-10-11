@@ -78,3 +78,10 @@ var/
 vendor/
 
 /root/
+
+.editorconfig
+.htaccess
+.htaccess.sample
+.php_cs.dist
+.travis.yml.sample
+.user.ini
