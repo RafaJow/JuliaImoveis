@@ -76,3 +76,5 @@ generated/.htaccess
 
 var/
 vendor/
+
+/root/
