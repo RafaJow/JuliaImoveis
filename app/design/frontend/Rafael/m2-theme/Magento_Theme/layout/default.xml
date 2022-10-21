@@ -11,6 +11,15 @@
         <referenceContainer name="page.top">
             <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" ttl="3600" before="-"/>
         </referenceContainer>
+        
+        <referenceContainer name="footer-container">
+            <container name="footer" as="footer" label="Page Footer" htmlTag="div" htmlClass="footer content">                      
+                <block class="Magento\Framework\View\Element\Template" name="custom-footer" template="Magento_Theme::html/custom-footer.phtml" />
+            </container>
+        </referenceContainer>
+
         <referenceContainer name="header.panel.wrapper" remove="true"/>
+        <referenceBlock name="minicart" remove="true"/>
+        <referenceBlock name="top.search" remove="true"/>
     </body>
 </page>
