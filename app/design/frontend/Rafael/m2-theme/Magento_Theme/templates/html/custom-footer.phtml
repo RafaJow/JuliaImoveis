@@ -6,11 +6,18 @@ $baseUrl = $baseUrl[0];
 <footer class="page-footer">
     <div class="row">
         <div class="footer-col">
-            <ul>
-                <li><a href="#">(48)99940-4105</a></li>
-                <li><a href="#">rafaelfagundes64@gmail.com</a></li>
-                <li><a href="#">Rua Manoel Álvaro de Araújo, 18<br>Garopaba - SC</a></li>
-            </ul>
+            <a href="<?php echo $block->getBaseUrl();?>"> 
+                <img class='logo-footer' src="<?php echo $block->getLayout()->getBlock('logo')->getLogoSrc(); ?>" alt="Júlia imóveis">
+            </a>
+        </div>
+        <div class="footer-col">
+            <label href="#">(48) 99940-4105</label>
+        </div>
+        <div class="footer-col">
+            <label href="#">juliasantinon@gmail.com</label>
+        </div>
+        <div class="footer-col">
+            <label href="#">Rua Manoel Álvaro de Araújo, 18<br>Garopaba - SC</label>
         </div>
     </div>
 </footer>
