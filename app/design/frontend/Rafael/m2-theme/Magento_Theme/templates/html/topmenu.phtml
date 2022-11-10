@@ -24,14 +24,47 @@ $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
         <?= /* @noEscape */ $_menuHtml?>
         <?= $block->getChildHtml() ?>
         <li class="lista-menu">
-            <a href="#">
+
+            <!-- <a href="#">
                 <span style="color: #FFFFFF">Contato</span>
-            </a>
+            </a> -->
+
+            <details class="contato-details">
+                <summary style="color: #FFFFFF">Contato</summary>
+                <div class="lista">
+                    <a>(48) 99614-9358</a>
+                    <a>santinoncorretora@gmail.com</a>
+                </div>
+            </details>
+
         </li>
     </ul>
 </nav>
 
 <style>
+.lista {
+    position: absolute;
+} 
+details.atendimento-details {
+    width: 100%;
+    display: flex;
+}
+summary {
+    display: flex;
+    color: #FFFFFF;
+    justify-content: center;
+}
+.lista {
+    position: absolute;
+    background: #c49164;
+    margin-top: 15px;
+}
+.lista a {
+    color: #FFFFFF;
+}
+
+/* ----------- */
+
 nav.navigation, .section-items.nav-sections-items {
     background: #c49164;
     margin: 0px;
@@ -62,6 +95,7 @@ nav.navigation, .section-items.nav-sections-items {
     display: flex;
     justify-content: center;
     margin: 0px;
+    align-items: center;
 }
 .ui-menu.ui-widget li > a {
     width: 100%;

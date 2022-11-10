@@ -13,9 +13,24 @@
         <?php if ($block->shouldRenderQuantity()) :?>
         <?php endif; ?>
         <div class="actions">
-            <div class="button-contato">
-                <a class="a-contato" href="">
-                    <span>Entre em Contato</span>
+            <div class="buttons-contato">
+                <a class="a-contato-whats" href="https://wa.me/5548996149358">
+                    <span>
+                        <img src="<?php echo $block->getUrl("pub/media/icons/")?>bolha-de-bate-papo.png"/>
+                        Fala conosco no Whatsapp!
+                    </span>
+                </a>
+                <a class="a-contato-numero" href="https://wa.me/5548996149358">
+                    <span>
+                        Ligue para nós 
+                        (48) 99614-9358
+                    </span>
+                </a>
+                <a class="a-contato-email" href="https://wa.me/5548996149358">
+                    <span>
+                        Mande um email
+                        santinoncorretora@gmail.com
+                    </span>
                 </a>
             </div>
             <?= $block->getChildHtml('', true) ?>
