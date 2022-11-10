@@ -1,0 +1,174 @@
+<div class="container-imovel-ideal">
+    <div class="row">
+        <div class="col-md-8">
+            <form name="addData" method="post" id="addData" class="form"
+                action="<?php echo $this->getFormAction(); ?>"
+                data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+                data-mage-init='{"validation":{}}'>
+                <fieldset class="fieldset">
+                    <fieldset class="fieldset row">
+                        <div class="fields col-md-6">
+        
+                            <div class="container-negocio-tipo-preco">
+                                <div class="field negocio required">
+                                    <label for="negocio">Que tipo de negócio você busca ?</label>
+                                    <select name="negocio" id="negocio">
+                                        <option value="aluguel">Aluguel</option>
+                                        <option value="compra">Compra</option>
+                                    </select>
+                                </div>
+                                <div class="field tipo required">
+                                    <label for="tipo">Que tipo de imóvel você procura ?</label>
+                                    <select name="tipo" id="tipo">
+                                        <option value="apartamento">Apartamento</option>
+                                        <option value="casa">Casa</option>
+                                        <option value="sobrado">Sobrado</option>
+                                    </select>
+                                </div>
+                                <div class="field preco required">
+                                    <label for="preco">Valor máximo ?</label>
+                                    <input data-validate="{required:true}" placeholder="R$ 300000" name="preco" id="preco" type="number" min="0.00" max="100000000.00" />
+                                </div>
+                            </div>
+
+                            <div class="container-regiao">
+                                <div class="field cidade required">
+                                    <label for="cidade">Qual cidade você procura imóvel?</label>
+                                    <select name="cidade" id="cidade">
+                                        <option value="imbituba">Imbituba</option>
+                                        <option value="garopaba">Garopaba</option>
+                                        <option value="paulo lopes">Paulo Lopes</option>
+                                    </select>
+                                </div>
+                                <div class="field bairro required">
+                                    <label for="bairro">Qual bairro você procura imóvel?</label>
+                                    <select name="bairro" id="bairro">
+                                        <option value="centro">Centro</option>
+                                        <option value="pinguirito">Pinguirito</option>
+                                        <option value="panoramico">Panorâmico</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="container-quartos-pessoas">
+                                <div class="field quartos required">
+                                    <label class="label" for="title"><span><?= $block->
+                                        escapeHtmlAttr(__('Quantos quartos seriam o ideal ?')) ?></span>
+                                    </label>
+                                    <select name="quartos" id="quartos">
+                                        <?php for($i=1; $i<=10; $i++){ ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="field pessoas required">
+                                    <label class="label" for="title"><span><?= $block->
+                                        escapeHtmlAttr(__('Quantos pessoas morarão no imóvel ?')) ?></span>
+                                    </label>
+                                    <select name="pessoas" id="pessoas">
+                                        <?php for($i=1; $i<=10; $i++){ ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="container-pet-patio">
+                                <div class="field patio required">
+                                    <label class="label" for="title"><span><?= $block->
+                                        escapeHtmlAttr(__('Você prefere imóveis com pátio ?')) ?></span>
+                                    </label>
+                                    <div class="patio-options">
+                                        <div class="container-radio-option">
+                                            <input type="radio" id="patio1" name="patio" value="sim" required>
+                                            <label for="patio1">Sim</label><br>
+                                        </div>
+                                        <div class="container-radio-option">
+                                            <input type="radio" id="patio2" name="patio" value="nao" required>
+                                            <label for="patio2">Não</label>
+                                        </div>
+                                        <div class="container-radio-option">
+                                            <input type="radio" id="patio3" name="patio" value="indiferente" required>
+                                            <label for="patio3">Indiferente</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field pet required">
+                                    <label class="label" for="title"><span><?= $block->
+                                        escapeHtmlAttr(__('Você possui algum pet ?')) ?></span>
+                                    </label>
+                                    <div class="pet-options required">
+                                        <input type="radio" id="pet1" name="pet" value="sim" required>
+                                        <label for="pet1">Sim</label><br>
+                                        <input type="radio" id="pet2" name="pet" value="nao" required>
+                                        <label for="pet2">Não</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- perguntas pessoais -->
+                            <div class="field name required">
+                                <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Nome completo')) ?></span></label>
+                                <div class="control">
+                                    <input name="name" id="name" title="Name" value="" class="input-text" type="text"
+                                        data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                                </div>
+                            </div>
+                            <div class="field idade required">
+                                <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Idade')) ?></span></label>
+                                <div class="control">
+                                    <input name="idade" id="idade" title="Idade" value="" class="input-text" type="text"
+                                        data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                                </div>
+                            </div>
+                            <div class="field email required">
+                                <label class="label" for="title"><span><?= $block->
+                                    escapeHtmlAttr(__('Email')) ?></span></label>
+                                <div class="control">
+                                    <input name="email" id="email" title="Email" value="" class="input-text" type="text"
+                                        data-validate="{required:true, 'validate-email':true}">
+                                </div>
+                            </div>
+                            <div class="field telephone required">
+                                <label class="label" for="title"><span><?= $block->escapeHtmlAttr(__('Contato')) ?></span></label>
+                                <div class="control">
+                                    <input name="telephone" id="telephone" title="Telephone" value="" class="input-text"
+                                        type="text" data-validate="{required:true}">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" title="Save"><span><?= $block->
+                            escapeHtmlAttr(__('Buscar Imóvel')) ?></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.container-regiao, .container-pet-patio, .container-quartos-pessoas, .container-negocio-tipo-preco {
+    display: flex;
+    margin: 2% 0%;
+}
+.field.cidade.required, .field.patio.required, .field.quartos.required, .container-negocio-tipo-preco div {
+    margin: 0% 2% 0% 0%;
+}
+select#quartos, select#pessoas {
+    width: 70px !important;
+}
+.field.quartos.required, .field.pessoas.required, .field.preco.required {
+    display: grid;
+}
+input#preco {
+    width: 150px;
+}
+</style>
+
