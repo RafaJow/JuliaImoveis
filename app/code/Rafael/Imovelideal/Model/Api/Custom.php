@@ -26,7 +26,6 @@ class Custom
  
     public function getProductCollection()
     {
-        $response = array('success' => false);
         try {
             $productCollection = $this->collectionFactory->create();
             $productCollection->addAttributeToSelect('*');
@@ -43,33 +42,32 @@ class Custom
                         $negocio = $category->getName();
                     }
                 }
-                $arrayProducts[$key]['name']        = $product->getName();
-                $arrayProducts[$key]['id']          = $product->getId();
-                $arrayProducts[$key]['sku']         = $product->getSku();
-                $arrayProducts[$key]['preco']       = $product->getPrice();
-                $arrayProducts[$key]['cidade']      = $product->getAttributeText('cidade');
-                $arrayProducts[$key]['bairro']      = $product->getAttributeText('bairro');
-                $arrayProducts[$key]['num_quartos'] = $product->getAttributeText('numero_de_quartos');
-                $arrayProducts[$key]['patio']       = $product->getAttributeText('possui_patio');
-                $arrayProducts[$key]['geminado']    = $product->getAttributeText('geminado');
-                $arrayProducts[$key]['negocio']     = $negocio;
-                $arrayProducts[$key]['tipo_imovel'] = $tipo_imovel;
+                $arrayProducts[$key]['name']        = strtolower($product->getName());
+                $arrayProducts[$key]['id']          = strtolower($product->getId());
+                $arrayProducts[$key]['sku']         = strtolower($product->getSku());
+                $arrayProducts[$key]['preco']       = strtolower($product->getPrice());
+                $arrayProducts[$key]['cidade']      = strtolower($product->getAttributeText('cidade'));
+                $arrayProducts[$key]['bairro']      = strtolower($product->getAttributeText('bairro'));
+                $arrayProducts[$key]['num_quartos'] = strtolower($product->getAttributeText('numero_de_quartos'));
+                $arrayProducts[$key]['patio']       = strtolower($product->getAttributeText('possui_patio'));
+                $arrayProducts[$key]['geminado']    = strtolower($product->getAttributeText('geminado'));
+                $arrayProducts[$key]['negocio']     = strtolower($negocio);
+                $arrayProducts[$key]['tipo_imovel'] = strtolower($tipo_imovel);
             }  
 
             // $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/imovel_api.log');
             // $logger = new \Zend_Log();
             // $logger->addWriter($writer);
-            // $logger->info(json_encode($arrayProducts, JSON_PRETTY_PRINT, JSON_UNESCAPED_UNICODE));
-
-            $response = $arrayProducts;
-            
+            // $logger->info(json_encode($arrayProducts, JSON_PRETTY_PRINT, JSON_UNESCAPED_UNICODE));            
             // $response = array('success'=>true, 'store'=>'store-teste', 'teste'=>'teste');
 
         } catch (\Exception $e) {
-            $response = array('success' => false, 'message' => $e->getMessage());
+            $arrayProducts = array('success' => false, 'message' => $e->getMessage());
             $this->logger->info($e->getMessage());
         }
-        return [$response]; 
+        return $arrayProducts; 
+        // $response['produtos'] = $arrayProducts;
+        // return json_encode($response);
     }
 
 }
