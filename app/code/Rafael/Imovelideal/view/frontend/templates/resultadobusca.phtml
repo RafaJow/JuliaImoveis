@@ -1,3 +1,44 @@
+<?php 
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    $email = $_SESSION['email'];
+    unset($_SESSION['email']);
+?>
 <span style="font-weight: 400;">Página resultado de busca do imóvel ideal</span>
 
-<label>teste <?php echo $this->getImoveisSelecionados(); ?></label>
+<?php
+
+
+// V795, loteamento-lagoa-park
+$lista_prod = $this->getImoveisSelecionados($email); 
+$is_first=true;
+$lista_sku="";
+foreach($lista_prod as $item){
+    $_product = $this->getProductById(intval($item['id_imovel']));
+    if($is_first){
+        $lista_sku .= $_product->getSku();
+        $is_first=false;
+    }else{
+        $lista_sku .= ', '.$_product->getSku();
+    }
+}
+
+$productsBlock = $this->getLayout()->createBlock(\Magento\CatalogWidget\Block\Product\ProductsList::class);
+$productsBlock->setProductsCount(count($lista_prod));
+$productsBlock->setTemplate("product/widget/content/grid.phtml");
+$productsBlock->setConditionsEncoded("^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`".$lista_sku."`^]^]");
+echo $productsBlock->toHtml();
+
+?>
+
+<!-- {{widget type="Magento\CatalogWidget\Block\Product\ProductsList"
+    show_pager="0"
+    products_count="10"
+    template="Magento_CatalogWidget::product/widget/content/grid.phtml"
+    conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`==`,`value`:`residencial-pedra-branca, sobrado-pinguirito`^]^]"}}
+
+ -->
+
+
+

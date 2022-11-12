@@ -99,8 +99,15 @@ class Save extends \Magento\Framework\App\Action\Action
 
                 $this->messageManager->addSuccessMessage('Salvo !');
                 $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-                $resultRedirect->setUrl('/imovelideal/index/index');
+                $resultRedirect->setUrl('/imovelideal/index/resultadobusca');
 
+                if (!isset($_SESSION)) {
+                    session_start();
+                }else{
+                    unset($_SESSION['email']);
+                }
+                $_SESSION['email'] = $email;
+                
                 return $resultRedirect;
             }
             // 2. GET request : Render the imovel ideal page 
