@@ -28,10 +28,22 @@ class Resultadobusca extends \Magento\Framework\View\Element\Template
     }
 
     public function getImoveisSelecionados($email){
-        $query = "SELECT * FROM imovel_cliente WHERE email like '".$email."'";
-        $connection = $this->_resource->getConnection();
-        $result = $connection->fetchAll($query); // select
-        return $result;
+        try{
+            $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/resultado_busca_block.log');
+            $logger = new \Zend_Log();
+            $logger->addWriter($writer);
+
+            $run = shell_exec('~/projects/python/SistemaEspecialista/imovel.py');
+
+            $query = "SELECT * FROM imovel_cliente WHERE email like '".$email."'";
+            $connection = $this->_resource->getConnection();
+            $result = $connection->fetchAll($query); // select
+
+            return $result;
+            
+        }catch(\Exception $e){
+            $logger->info('exception: '.$e->getMessage());
+        }
     }
 
     public function getProductById($id)
