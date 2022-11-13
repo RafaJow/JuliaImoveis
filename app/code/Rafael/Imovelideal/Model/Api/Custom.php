@@ -53,6 +53,7 @@ class Custom
                 $arrayProducts[$key]['geminado']    = strtolower($product->getAttributeText('geminado'));
                 $arrayProducts[$key]['negocio']     = strtolower($negocio);
                 $arrayProducts[$key]['tipo_imovel'] = strtolower($tipo_imovel);
+                $arrayProducts[$key]['aceita_pet']  = strtolower($product->getAttributeText('aceita_pet'));
             }  
 
             // $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/imovel_api.log');
