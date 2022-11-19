@@ -33,14 +33,36 @@ class Resultadobusca extends \Magento\Framework\View\Element\Template
             $logger = new \Zend_Log();
             $logger->addWriter($writer);
 
-            $run = shell_exec('~/projects/python/SistemaEspecialista/imovel.py');
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => '172.25.102.245:8000/busca-imovel',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+                "email": "'.$email.'"
+            }',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+            $logger->info('responsee: '.$response);
+            $logger->info('status: '.json_encode(curl_getinfo($curl, CURLINFO_HTTP_CODE)));
+            curl_close($curl);
 
             $query = "SELECT * FROM imovel_cliente WHERE email like '".$email."'";
             $connection = $this->_resource->getConnection();
             $result = $connection->fetchAll($query); // select
 
             return $result;
-            
+
         }catch(\Exception $e){
             $logger->info('exception: '.$e->getMessage());
         }
