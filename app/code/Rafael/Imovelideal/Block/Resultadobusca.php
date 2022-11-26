@@ -36,7 +36,7 @@ class Resultadobusca extends \Magento\Framework\View\Element\Template
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => '172.25.102.245:8000/busca-imovel',
+            CURLOPT_URL => '172.25.109.199:8000/busca-imovel',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
