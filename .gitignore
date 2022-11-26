@@ -85,3 +85,4 @@ vendor/
 .php_cs.dist
 .travis.yml.sample
 .user.ini
+pub/media
