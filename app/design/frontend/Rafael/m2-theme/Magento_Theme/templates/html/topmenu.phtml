@@ -25,17 +25,17 @@ $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
         <?= $block->getChildHtml() ?>
         <li class="lista-menu">
 
-            <!-- <a href="#">
+            <a href="<?= $block->getBaseUrl() ?>contact/index/">
                 <span style="color: #FFFFFF">Contato</span>
-            </a> -->
+            </a>
 
-            <details class="contato-details">
+            <!-- <details class="contato-details">
                 <summary style="color: #FFFFFF">Contato</summary>
                 <div class="lista">
                     <a>(48) 99614-9358</a>
                     <a>santinoncorretora@gmail.com</a>
                 </div>
-            </details>
+            </details> -->
 
         </li>
     </ul>

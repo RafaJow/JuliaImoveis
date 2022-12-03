@@ -6,12 +6,42 @@
 
 /** @var $block \Magento\Catalog\Block\Product\View */
 ?>
-<?php $_product = $block->getProduct(); ?>
+<?php $_product = $block->getProduct();
+$currencyHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+?>
 <?php if ($_product->isSaleable()) :?>
 <div class="box-tocart">
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()) :?>
         <?php endif; ?>
+
+        <div class="informacao-negocio-imovel">
+            <?php
+                $tipo_imovel="";
+                $negocio="";
+                $categories = $_product->getCategoryCollection()->addAttributeToSelect('name');
+                foreach($categories as $category)
+                { 
+                    if($category->getName() != "Vendas" AND $category->getName() != "Locações"){
+                        $tipo_imovel = $category->getName();
+                    }else{
+                        $negocio = $category->getName();
+                    }
+                }
+                $price = $_product->getPrice();
+                $price = $currencyHelper->currency($price, true, false);
+
+                $negocio = rtrim($negocio, "s");
+                $tipo_imovel = rtrim($tipo_imovel, "s");
+                if($negocio == "Venda"){
+                    $mensagem=$tipo_imovel." á venda por apenas <strong>".$price."</strong>. Para mais informações entre em contato conosco!";
+                }else{
+                    $mensagem=$tipo_imovel." para locação por apenas <strong>".$price."</strong> mensais com contrato anual. Para mais informações entre em contato conosco!";
+                }
+            ?>
+            <label class="label-informativo"><?= $mensagem ?></label>
+        </div>
+
         <div class="actions">
             <div class="buttons-contato">
                 <a class="a-contato-whats" href="https://wa.me/5548996149358">
@@ -20,18 +50,9 @@
                         Fale conosco via WhatsApp!
                     </span>
                 </a>
-                <a class="a-contato-numero" href="https://wa.me/5548996149358">
-                    <span>
-                        Ligue para nós 
-                        (48) 99614-9358
-                    </span>
-                </a>
-                <a class="a-contato-email" href="https://wa.me/5548996149358">
-                    <span>
-                        Mande um email
-                        santinoncorretora@gmail.com
-                    </span>
-                </a>
+                <label class="label-contatos" href="https://wa.me/5548996149358">
+                    Ligue para nós (48) 99614-9358 <br>
+                </label>
             </div>
             <?= $block->getChildHtml('', true) ?>
         </div>
@@ -40,6 +61,14 @@
 <?php endif; ?>
 
 <style>
+/* label informativo descrição */
+.informacao-negocio-imovel {
+    margin-bottom: 5%;
+}
+label.label-informativo {
+    font-size: 18px;
+}
+/* botão de contato whats  */
 a.a-contato-whats {
     padding: 1% 3%;
     font-size: 20px;
