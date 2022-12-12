@@ -36,7 +36,7 @@ class Resultadobusca extends \Magento\Framework\View\Element\Template
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => '172.25.97.127:8000/busca-imovel',
+            CURLOPT_URL => '172.25.111.147:8000/busca-imovel',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -57,9 +57,15 @@ class Resultadobusca extends \Magento\Framework\View\Element\Template
             $logger->info('status: '.json_encode(curl_getinfo($curl, CURLINFO_HTTP_CODE)));
             curl_close($curl);
 
+            // imóveis ideais
             $query = "SELECT * FROM imovel_cliente WHERE email like '".$email."'";
             $connection = $this->_resource->getConnection();
-            $result = $connection->fetchAll($query); // select
+            $result['imoveis'] = $connection->fetchAll($query); // select
+
+            // imóveis próximos
+            $query = "SELECT * FROM imovel_proximo_cliente WHERE email like '".$email."'";
+            $connection = $this->_resource->getConnection();
+            $result['imoveis_proximos'] = $connection->fetchAll($query); // select
 
             return $result;
 

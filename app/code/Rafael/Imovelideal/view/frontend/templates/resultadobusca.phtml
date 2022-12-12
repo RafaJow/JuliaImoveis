@@ -5,12 +5,13 @@
     $email = $_SESSION['email'];
     // unset($_SESSION['email']);
 ?>
-<span style="font-weight: 400;">Página resultado de busca do imóvel ideal</span>
+<span style="font-weight: 400;">Resultado de busca do imóvel ideal</span>
 
 <?php
 
 // V795, loteamento-lagoa-park
-$lista_prod = $this->getImoveisSelecionados($email); 
+$lista_geral_imoveis = $this->getImoveisSelecionados($email); 
+$lista_prod = $lista_geral_imoveis['imoveis'];
 $is_first=true;
 $lista_sku="";
 $flag_sem_imovel = false;
@@ -27,7 +28,7 @@ foreach($lista_prod as $item){
         $lista_sku .= ', '.$_product->getSku();
     }
 }
-
+$mensagem_imoveis_not_found="Com ";
 if(!$flag_sem_imovel){
     $productsBlock = $this->getLayout()->createBlock(\Magento\CatalogWidget\Block\Product\ProductsList::class);
     $productsBlock->setProductsCount(count($lista_prod));
@@ -36,6 +37,42 @@ if(!$flag_sem_imovel){
     echo $productsBlock->toHtml();
 }else{
     echo "<h2>Não achamos imóveis adequados para a sua pesquisa.</h2>";
+    $mensagem_imoveis_not_found="Porém, com ";
+}
+?>
+
+<!-- ---------------------------------------------- IMÓVEIS PRÓXIMOS ---------------------------------------------- -->
+
+<?php
+$lista_imoveis_proximos = $lista_geral_imoveis['imoveis_proximos'];
+$is_first=true;
+$lista_sku="";
+$flag_sem_imovel = false;
+foreach($lista_imoveis_proximos as $item){
+    if(intval($item['id_imovel']) == 0){
+        $flag_sem_imovel = true;
+        break;
+    }
+    $_product = $this->getProductById(intval($item['id_imovel']));
+    if($is_first){
+        $lista_sku .= $_product->getSku();
+        $is_first=false;
+    }else{
+        $lista_sku .= ', '.$_product->getSku();
+    }
+}
+
+if(!$flag_sem_imovel){
+    echo '<h1>'.$mensagem_imoveis_not_found.'base na sua pesquisa você também pode gostar de:</h1>';
+    echo '<span style="font-weight: 400;">Seleção de imóveis próximos e parecidos com sua preferência</span>';
+    
+    $productsBlock = $this->getLayout()->createBlock(\Magento\CatalogWidget\Block\Product\ProductsList::class);
+    $productsBlock->setProductsCount(count($lista_imoveis_proximos));
+    $productsBlock->setTemplate("product/widget/content/grid.phtml");
+    $productsBlock->setConditionsEncoded("^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`".$lista_sku."`^]^]");
+    echo $productsBlock->toHtml();
+}else{
+    echo "<h2>Não achamos imóveis parecidos em bairros próximos.</h2>";
 }
 ?>
 
